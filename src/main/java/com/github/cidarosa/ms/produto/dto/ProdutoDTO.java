@@ -1,5 +1,6 @@
 package com.github.cidarosa.ms.produto.dto;
 
+import com.github.cidarosa.ms.produto.entities.Categoria;
 import com.github.cidarosa.ms.produto.entities.Produto;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -30,11 +31,15 @@ public class ProdutoDTO {
     @Positive(message = "O campo valor deve possuir um número positivo maior que 0")
     private Double valor;
 
+    @NotNull(message = "Campo categoria é requerido")
+    private CategoriaDTO categoria;
+
     public ProdutoDTO(Produto produto) {
         id = produto.getId();
         nome = produto.getNome();
         descricao = produto.getDescricao();
         valor = produto.getValor();
+        categoria = new CategoriaDTO(produto.getCategoria());
     }
 }
 
