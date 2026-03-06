@@ -1,6 +1,7 @@
 package com.github.cidarosa.ms.produto.service;
 
 import com.github.cidarosa.ms.produto.dto.ProdutoDTO;
+import com.github.cidarosa.ms.produto.entities.Categoria;
 import com.github.cidarosa.ms.produto.entities.Produto;
 import com.github.cidarosa.ms.produto.exceptions.DatabaseException;
 import com.github.cidarosa.ms.produto.exceptions.ResourceNotFoundException;
@@ -59,6 +60,10 @@ public class ProdutoService {
         produto.setNome(produtoDTO.getNome());
         produto.setDescricao(produtoDTO.getDescricao());
         produto.setValor(produtoDTO.getValor());
+
+        Categoria categoria = categoriaRepository
+                .getReferenceById(produtoDTO.getCategoria().getId());
+        produto.setCategoria(categoria);
     }
 
     @Transactional
